@@ -4,7 +4,10 @@
  Part(PID,Pname, color, price) 
  Supplies(SID, PID, qty, date_supplied)   */
  
+ ---------------------------------------------------------------------------------------
  /* DDL commands */
+ ---------------------------------------------------------------------------------------
+
 create database Hospital_Management_System;
  use Hospital_Management_System;
  
@@ -15,7 +18,7 @@ drop table Supplier;
  Sname varchar(30),
  branch varchar(30),
  city varchar(30),
- phone int
+ phone varchar(15)
  );
  
  create table Part(
@@ -72,13 +75,16 @@ drop table Part;
 # Rename table name sup to Supplier again
 
 Alter table sup rename to Supplier;
+
 # Use SELECT command
 
  select * from Supplier;
  select * from Part;
  select * from Supplies;
  
+----------------------------------------------------------------------------------------
 /* DML commands */
+----------------------------------------------------------------------------------------
 
 # 1. Insert at least 10 records in tables supplier, part and supplies  
 
@@ -126,7 +132,7 @@ values
  
 # 2. Show the contents in tables supplier, part and supplies  
 
- SELECT * FROM  Supplier;
+SELECT * FROM  Supplier;
 SELECT * FROM  Part;
 SELECT * FROM Supplies;
 
@@ -178,3 +184,99 @@ set city='BOMBAY';
 Update Supplier
 set city='Goa'
 where Sname='Vandana';
+
+---------------------------------------------------------------------------------------
+/* Queries with Constraints */
+---------------------------------------------------------------------------------------
+
+# 1. Create the supplier table with Primary Key Constraint
+
+create table Supplier(
+ SID varchar(20) primary key ,
+ Sname varchar(30),
+ branch varchar(30),
+ city varchar(30),
+ phone varchar(15)
+ );
+ 
+ # 2. Create supplies table with Foreign key Constraint 
+
+create table Supplies(
+ SID varchar(20) primary key,
+ PID varchar(20),
+ qty int,
+ date_supplied date,
+ constraint fk_supplies_part
+  foreign key (PID)
+  references Part(PID) 
+ );
+ 
+ # 3. Create a part table with UNIQUE Constraint 
+
+ create table Part(
+ PID varchar(20) primary key,
+ Pname varchar(30),
+ color varchar(30) unique,
+ price float
+ );
+ 
+ # 4. Create supplier Table with Check Constraints 
+ 
+ create table Supplier(
+ SID varchar(20) primary key ,
+ Sname varchar(30),
+ branch varchar(30),
+ city varchar(30) check(city='Faridabad'),
+ phone varchar(15)
+ );
+ 
+ # 5. Create Supplier table with Default Constraint 
+ 
+ create table Supplier(
+ SID varchar(20) primary key ,
+ Sname varchar(30),
+ branch varchar(30) default 'Branch A',
+ city varchar(30),
+ phone varchar(15)
+ );
+ 
+ ---------------------------------------------------------------------------------------
+ /* Queries on TCL */
+ ---------------------------------------------------------------------------------------
+ 
+# 1. Create Savepoints
+
+ start transaction;
+ insert into Supplier
+ values('1011', 'Rahul', 'branch c', 'Ambala', '7897324578');
+ savepoint sp1;
+ 
+ insert into Supplier
+ values('1012', 'Shivam', 'branch c', 'Ambala', '7897324599');
+ savepoint sp2;
+ 
+ insert into Supplier
+ values('1013', 'Rahul kumar', 'branch c', 'Ambala', '7897324572');
+ 
+ savepoint sp3; 
+ 
+ insert into Supplier
+ values('1014', 'Sonu Kumar', 'branch c', 'Ambala', '7897324574');
+ 
+# 2. Rollback to SavePoints3.Use Commit to save on 
+ 
+rollback to savepoint sp2;
+commit;
+
+--------------------------------------------------------------------------------------
+/* Aggregate Functions */
+--------------------------------------------------------------------------------------
+
+# 1. Find the minimum, maximum, average and sum of costs of parts
+
+select min(price) from Part;
+
+# 2. Count the total number of parts present
+
+# 3. Retrieve the average cost of all parts supplied by ‘Mike’ 
+
