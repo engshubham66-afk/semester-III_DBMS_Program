@@ -100,7 +100,8 @@ insert into Supplier
 ('s7', 'Ritesh', 'Branch B', 'Chandan Nagar', 1190283723),
 ('s8', 'Vishal', 'Branch C', 'Faridabad', 1190283722),
 ('s9', 'Ram', 'Branch B', 'Parvtiya Colony', 1190283721),
-('s10', 'Ramesh', 'Branch C', 'Chandan Nagar', 1190283728);
+('s10', 'Ramesh', 'Branch C', 'Chandan Nagar', 1190283728),
+('s11',	'Mike',	'Branch C',	'Chandan Nagar', 9190283728);
 
 insert into Part
 (PID, Pname, color, price)
@@ -114,7 +115,8 @@ values
 ('p107', 'IV Stand', 'Silver', '1800'),
 ('p108', 'Examination Table', 'White', '12000'),
 ('p109', 'Computer', 'Black', '45000'),
-('p1010', 'Printer', 'White', '12000');
+('p1010', 'Printer', 'White', '12000'),
+('p1011', 'Printer', 'White', '12000');
 
 insert into Supplies
 (SID, PID, qty, date_supplied)
@@ -128,8 +130,9 @@ values
 ('s7', 'p107', 800, '2026-09-15'),
 ('s8', 'p108', 500, '2026-09-15'),
 ('s9', 'p109', 700, '2026-09-15'),
-('s10', 'p1010', 700, '2026-09-15');
- 
+('s10', 'p1010', 700, '2026-09-15'),
+('s11',	'p1011','500',	'2026-09-19');
+
 # 2. Show the contents in tables supplier, part and supplies  
 
 SELECT * FROM  Supplier;
@@ -276,7 +279,41 @@ commit;
 
 select min(price) from Part;
 
+select max(price) from Part;
+
+select avg(price) from Part;
+
 # 2. Count the total number of parts present
+
+select count(*) from Part;
 
 # 3. Retrieve the average cost of all parts supplied by ‘Mike’ 
 
+select avg(p.price) 
+from Part p
+join Supplies s on p.PID = s.PID
+join Supplier sup on s.SID = sup.SID
+where sup.Sname = 'Mike';
+
+---------------------------------------------------------------------------------------
+# Queries on GROUP BY, HAVING AND ORDER BY Clauses 
+---------------------------------------------------------------------------------------
+
+# 1. Display total price of parts of each color
+
+select color, sum(price) from Part group by color;
+
+/* 2. Find the branch and the number of suppliers in that branch for branches 
+which have more than 2 suppliers */
+
+select branch, count(*) as supplier_count from Supplier
+group by branch having count(*) > 2;
+
+# 3. Find all parts sorted by pname in ascending order and cost in descending order
+
+select * from Part order by Pname asc, price desc;
+
+# 4. Find the branch and the number of suppliers in that branch 
+
+select branch, count(*) as supplier_count from Supplier
+group by branch;
