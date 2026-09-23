@@ -1,7 +1,7 @@
 --                          Pratical no. - 1
 ==================================================================================================
  
--- Hospital Management System
+-- Reduce the ER diagram of 'Hospital Management System' into tables.
  
 /* Consider the following Schema  Supplier(SID, Sname, branch, city, phone) 
  Part(PID,Pname, color, price) 
