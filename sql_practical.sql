@@ -102,9 +102,9 @@ insert into Supplier
 ('s6', 'Anuj', 'Branch B', 'Gurugram', 1190283724),
 ('s7', 'Ritesh', 'Branch B', 'Chandan Nagar', 1190283723),
 ('s8', 'Vishal', 'Branch C', 'Faridabad', 1190283722),
-('s9', 'Ram', 'Branch B', 'Parvtiya Colony', 1190283721),
-('s10', 'Ramesh', 'Branch C', 'Chandan Nagar', 1190283728),
-('s11',	'Mike',	'Branch C',	'Chandan Nagar', 9190283728);
+('s9', 'Ram', 'Branch B', 'Parvatiya Colony', 1190283721),
+('s10', 'Ramesh', 'Branch C', 'Chandan Nagar', 1190283720),
+('s11',	'Mike',	'Branch C',	'Chandan Nagar', 1190283719);
 
 insert into Part
 (PID, Pname, color, price)
