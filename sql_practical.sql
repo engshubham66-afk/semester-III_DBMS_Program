@@ -119,7 +119,7 @@ values
 ('p108', 'Examination Table', 'White', '12000'),
 ('p109', 'Computer', 'Black', '45000'),
 ('p1010', 'Printer', 'White', '12000'),
-('p1011', 'Printer', 'White', '12000');
+('p1011', 'ECG Lead Wire', 'White', '12000');
 
 insert into Supplies
 (SID, PID, qty, date_supplied)
