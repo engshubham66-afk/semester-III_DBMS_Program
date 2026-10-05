@@ -320,3 +320,61 @@ select * from Part order by Pname asc, price desc;
 
 select branch, count(*) as supplier_count from Supplier
 group by branch;
+
+----------------------------------------------------------------------------------------------
+/* Join Operators */
+----------------------------------------------------------------------------------------------
+
+/* join */
+
+-- Create tables
+
+create table Products(
+ProductID int primary key,
+ProductName varchar(50),
+CategoryID int,
+Price float
+);
+
+create table Categories(
+CategoryID int primary key,
+CategoryName varchar(50),
+Description varchar(200)
+);
+
+-- insert values in the tables Products and Categories
+
+insert into Products 
+(ProductID, ProductName, CategoryID, Price)
+values
+(3, 'Aniseed Syrup', 2, 10.00),
+(4, 'Syrup', 1, 80.00);
+
+insert into Categories 
+(CategoryID, CategoryName, Description)
+values
+(2, 'Condiments', 'Sweet and savory sauces, relishes, spreads, and seasonings'),
+(4, 'Condiments', 'Sweet and savory sauces');
+
+-- Inner Join
+
+SELECT ProductID, ProductName, CategoryName 
+from Products
+inner join Categories
+on Products.CategoryID = Categories.CategoryID;
+
+-- Natural join
+
+select * from Products natural join Categories;
+
+-- Left order join
+
+select * from Products 
+left join Categories
+on Products.CategoryID = Categories.CategoryID;
+
+-- Right order join
+
+select * from Products
+right join Categories
+on Products.CategoryID = Categories.CategoryID;
