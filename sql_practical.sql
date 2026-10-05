@@ -320,3 +320,9 @@ select * from Part order by Pname asc, price desc;
 
 select branch, count(*) as supplier_count from Supplier
 group by branch;
+
+----------------------------------------------------------------------------------------------
+/* Join Operators */
+----------------------------------------------------------------------------------------------
+
+
