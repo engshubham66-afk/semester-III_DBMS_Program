@@ -325,6 +325,7 @@ group by branch;
 /* Join Operators */
 ----------------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
 /* join */
 
 -- Create tables
@@ -378,3 +379,5 @@ on Products.CategoryID = Categories.CategoryID;
 select * from Products
 right join Categories
 on Products.CategoryID = Categories.CategoryID;
+
+
