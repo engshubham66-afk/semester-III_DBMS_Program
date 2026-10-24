@@ -178,7 +178,8 @@ where Sname like '-r%';
 
 -- 11. Find the name of supplier whose name starts with ‘V’ and ends with ‘A’  
 select * from Supplier
-where Sname like 'v%a';
+where Sn
+ame like 'v%a';
 
 -- 12. Change the city of all suppliers to ‘BOMBAY’  
 set sql_safe_updates = 0;
@@ -268,10 +269,10 @@ create table Supplies(
  
  insert into Supplier
  values('1014', 'Sonu Kumar', 'branch c', 'Ambala', '7897324574');
- 
+ select * from Supplier;
 -- 2. Rollback to SavePoints3.Use Commit to save on 
  
-rollback to savepoint sp2;
+rollback to savepoint sp3;
 commit;
 
 --------------------------------------------------------------------------------------
@@ -379,4 +380,51 @@ select * from Products
 right join Categories
 on Products.CategoryID = Categories.CategoryID;
 
+/* Set THeory Operators */
+
+-- 1.Show the use of UNION operator with union compatibility 
+-- relation A 
+create table A
+(
+SID int primary key,
+Name varchar(30),
+Subject varchar(30)
+);
+
+-- relation B 
+create table B
+(
+SID int primary key,
+Name varchar(30),
+Subject varchar(30)
+);
+
+-- insert values in the tables
+
+insert into A
+(SID, Name, Subject)
+values
+(123, 'Shubham Kumar', 'History'),
+(223, 'Lalit Kumar', 'Math');
+
+insert into B
+(SID, Name, Subject)
+values
+(123, 'Shubham Kumar', 'History'),
+(184, 'Deepak', 'Management');
+
+-- A U B 
+select * from A
+union
+select * from B;
+
+-- A intersect B
+select * from A
+intersect
+select * from B;
+
+-- A - B 
+select * from A
+minus
+select * from B;
 
